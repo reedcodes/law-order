@@ -1,0 +1,33 @@
+.js .js-only { display: none; }
+
+html {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+body {
+  max-width: 1140px;
+  margin: 0 auto;
+  background: #000;
+  color: #fff;
+  font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+  font-size: 1rem;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.answer {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  font-size: 6rem;
+  font-family: 'Bree Serif', serif;
+}
+
+.episode {
+  margin-bottom: 2rem;
+}
