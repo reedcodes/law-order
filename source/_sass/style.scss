@@ -1,16 +1,28 @@
+@use 'sass:math';
+
+
+
 body {
   display: grid;
   grid-template-columns:
     [page-start]
-      minmax( 0, 1fr )
+      minmax( 2rem, 1fr )
       [content-start]
-        min( min( 100vw, 100% ), 80ch )
+        min( min( calc( 100vw - 4rem ), calc( 100% - 4rem ) ), 80ch )
       [content-end]
-      minmax( 0, 1fr )
+      minmax( 2rem, 1fr )
     [page-end];
+
+  margin: 0;
+  padding: 0;
 
   background: #333;
   color: #ddd;
+
+  font-size: clamp( 1rem, ( 1rem + 2vw ), 1.5rem );
+  line-height: calc( 2.5px + 2.5ex + 2.5px );
+  font-family: system-ui, sans-serif;
+  text-rendering: optimizeSpeed;
 }
 
 main {
@@ -28,5 +40,58 @@ a {
   &:focus {
     outline-color: currentcolor;
     outline-offset: 0.2em;
+  }
+}
+
+
+
+/*
+ * Headings.
+ * Setting fluid type scale.
+ */
+
+:is(
+  h1, h2, h3, h4, h5, h6,
+  .h1, .h2, .h3, .h4, .h5, .h6
+) {
+
+  margin-bottom: 0.65em;
+  font-weight: 500;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+// Major third ratio.
+$type-scale: 1.25;
+
+// Base size ~20px, assuming 16px default browser size.
+$base-size: 1.5rem;
+
+// Heading levels.
+$headings: 5, 4, 3, 2, 1;
+$heading-size: $base-size;
+
+@each $heading in $headings {
+  // Apply the heading size for this level based on ratio.
+  $heading-size: $heading-size * $type-scale;
+
+  h#{ $heading }, .h#{ $heading } {
+    // Have the heading size as the default, backup.
+    font-size: $heading-size;
+
+    // First, remove the unit to get just a number.
+    $heading-unitless: math.div( $heading-size, ( $heading-size * 0 + 1 ) );
+
+    // Calculate the minimum font size allowed.
+    $heading-min: $heading-unitless - ( 0.33 * $heading-unitless );
+
+    // Calculate the responsive font size.
+    $heading-responsive: ( $heading-unitless - $heading-min ) + 4vw;
+
+    font-size: clamp(
+      #{ $heading-min }rem,
+      #{ $heading-responsive } + 1rem,
+      #{ $heading-size }
+    );
   }
 }
