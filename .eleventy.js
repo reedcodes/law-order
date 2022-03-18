@@ -34,5 +34,7 @@ module.exports = function( eleventyConfig ) {
       includes: "_includes",
       output: "site"
     },
+
+    pathPrefix: "/law-order"
   };
 };
