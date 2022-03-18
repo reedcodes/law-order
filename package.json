@@ -1,0 +1,32 @@
+{
+  "name": "law-order",
+  "version": "1.0.0",
+  "description": "an experiment to find out if Law &amp; Order is on, using javascript to read TV listings",
+  "keywords": [],
+  "author": "Reed Piernock",
+  "license": "GPL-3.0-only",
+  "homepage": "https://github.com/reedcodes/law-order#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reedcodes/law-order.git"
+  },
+  "bugs": {
+    "url": "https://github.com/reedcodes/law-order/issues"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.0",
+    "@11ty/eleventy-fetch": "^3.0.0",
+    "dotenv": "^16.0.0",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0",
+    "moment": "^2.29.1",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.49.9"
+  },
+  "main": "gulpfile.js",
+  "scripts": {
+    "build:sass": "gulp sass",
+    "build:11ty": "npx @11ty/eleventy",
+    "build": "npm-run-all build:sass build:11ty"
+  }
+}

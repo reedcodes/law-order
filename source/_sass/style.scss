@@ -1,0 +1,32 @@
+body {
+  display: grid;
+  grid-template-columns:
+    [page-start]
+      minmax( 0, 1fr )
+      [content-start]
+        min( min( 100vw, 100% ), 80ch )
+      [content-end]
+      minmax( 0, 1fr )
+    [page-end];
+
+  background: #333;
+  color: #ddd;
+}
+
+main {
+  grid-area: content;
+}
+
+a {
+  color: #fc6;
+
+  &:hover,
+  &:focus {
+    color: #6cf;
+  }
+
+  &:focus {
+    outline-color: currentcolor;
+    outline-offset: 0.2em;
+  }
+}
