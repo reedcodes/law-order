@@ -1,0 +1,40 @@
+---
+layout: base.njk
+---
+
+{%- set current_episodes = "" -%}
+{%- set upcoming_episodes = "" -%}
+
+{%- for listing in tvmedia -%}
+  {%- if listing.showName === "Law & Order" -%}
+
+    {%- set episode -%}
+      <li><b>{{ listing.listDateTime | timeShort }}:</b> {{ listing.episodeTitle }} ({{ listing.name }})</li>
+    {%- endset -%}
+
+    {%- if listing.listDateTime | timeHour === time_hour -%}
+      {%- set current_episodes = current_episodes + episode -%}
+    {%- else -%}
+      {%- set upcoming_episodes = upcoming_episodes + episode -%}
+    {%- endif -%}
+
+  {%- endif -%}
+{%- endfor -%}
+
+<p class="answer">{{ "Yes" if current_episodes else "No" }}</p>
+
+<p>It is currently {% time %} on {% date %}. <i>Law & Order</i> <strong>{{ "is" if current_episodes else "is not" }}</strong> on at this time.</p>
+
+<p>Browsing or searching <a href="https://titantv.com/">Titan TV</a> should also be able to answer this eternal question.</p>
+
+{%- if current_episodes -%}
+  <h2>On right now</h2>
+  <ul>{{- current_episodes | safe -}}</ul>
+{%- endif -%}
+
+{%- if upcoming_episodes -%}
+  <h2>Upcoming episodes</h2>
+  <ul>{{- upcoming_episodes | safe -}}</ul>
+{%- endif -%}
+
+<p>This is an experiment using a generic lineup for U.S. Eastern time zone listings only. Information from the <a href="http://www.tvmedia.ca/">tvmedia</a> API is called and cached only at build time. Eventually, I would love to upgrade to a professional account, and update results in real time!</p>
